@@ -6,6 +6,7 @@ from WorldTimeAPI import service as serv
 import datetime
 from typing import List, Optional
 import discord
+import argparse
 
 class TimeZone:
     def __init__(self, tz_str: str) -> None:
@@ -35,6 +36,13 @@ def get_current_datetime(tz: TimeZone) -> str:
     return dt.strftime("%Y-%m-%d %H:%M:%S")
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--token", help="discord bot token")
+    args = parser.parse_args()
+    token: str = args.token
+    if not token:
+        print("Please provice discord bot token via --token")
+
     client = discord.Client()
 
     @client.event
@@ -58,4 +66,4 @@ if __name__ == "__main__":
             user: str = message.author.mention
             await message.channel.send(f"{user}, {reply}")
 
-    client.run("ODU2Nzc2MTIwNTAxNTM0NzUw.YNF88Q.kYlMSLR3kISWTdlfureWhyp2ZrI")
+    client.run(token)
