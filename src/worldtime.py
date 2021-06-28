@@ -42,6 +42,7 @@ if __name__ == "__main__":
     token: str = args.token
     if not token:
         print("Please provice discord bot token via --token")
+        exit()
 
     client = discord.Client()
 
